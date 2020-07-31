@@ -1,6 +1,7 @@
 package com.philipstudio.pizzaplan.view;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -49,8 +50,6 @@ public class MyOrderActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         if (intent != null){
             tongtienhoadon = intent.getDoubleExtra("tongtien", 100);
-            diachi = intent.getStringExtra("diachi");
-            edtDiachi.setText(diachi);
             thietLapThongTinHoaDon(tongtienhoadon);
         }
 
@@ -85,16 +84,26 @@ public class MyOrderActivity extends AppCompatActivity {
                     break;
 
                 case R.id.imagebutton_googlemap:
-                    Intent intent3 = new Intent(MyOrderActivity.this, MapsActivity.class);
-                    startActivity(intent3);
+                    showGoogleMapDeLayDiaChiGiaoHang();
                     break;
             }
         }
     };
 
     private void showGoogleMapDeLayDiaChiGiaoHang(){
-        Intent intent = new Intent();
+        Intent intent = new Intent(MyOrderActivity.this, MapsActivity.class);
         startActivityForResult(intent, REQUEST_CODE_GET_LOACTION_SUCCESS);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_GET_LOACTION_SUCCESS && data != null){
+            diachi = data.getStringExtra("diachi");
+            edtDiachi.setText(diachi);
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void thietLapThongTinHoaDon(double number){
