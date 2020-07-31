@@ -71,6 +71,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.setOnMapClickListener(this);
 
+        LatLng latLng = new LatLng(10.803283, 106.702992);
+        showMarkerInGoogleMap(latLng, "Current Marker");
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -86,7 +89,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapClick(LatLng latLng) {
-        mMap.clear();
         Geocoder geocoder = new Geocoder(this, Locale.ENGLISH);
         try {
             List<Address> listDiaChi = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);

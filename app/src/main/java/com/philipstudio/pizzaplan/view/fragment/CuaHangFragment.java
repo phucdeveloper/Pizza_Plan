@@ -37,11 +37,6 @@ public class CuaHangFragment extends Fragment implements OnMapReadyCallback, Goo
     }
 
     @Override
-    public void onMapClick(LatLng latLng) {
-        showMarkerInGoogleMap(latLng, "Current Marker");
-    }
-
-    @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
         mGoogleMap.getUiSettings().setCompassEnabled(true);
@@ -63,6 +58,11 @@ public class CuaHangFragment extends Fragment implements OnMapReadyCallback, Goo
             return;
         }
         mGoogleMap.setMyLocationEnabled(true);
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        showMarkerInGoogleMap(latLng, "Current Marker");
     }
 
     private void showMarkerInGoogleMap(LatLng latLng, String title) {
