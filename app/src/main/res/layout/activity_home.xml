@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="@color/colorBackground"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:id="@+id/frame_layout_container"
+        android:layout_above="@id/bottom_navigation_viewEx"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+        app:itemTextColor="@color/colorPrimary"
+        app:itemIconTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorBackground"
+        app:menu="@menu/menu_app"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottom_navigation_viewEx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

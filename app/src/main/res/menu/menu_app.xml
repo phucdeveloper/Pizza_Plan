@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:icon="@drawable/ic_baseline_menu"
+        android:title="@string/menu"
+        android:id="@+id/menu"/>
+
+    <item
+        android:icon="@drawable/ic_baseline_search"
+        android:title="@string/search"
+        android:id="@+id/tim_kiem"/>
+
+    <item
+        android:id="@+id/cua_hang"
+        android:icon="@drawable/ic_baseline_store"
+        android:title="@string/store"/>
+    <item
+        android:icon="@drawable/ic_baseline_payment"
+        android:title="@string/payment_history"
+        android:id="@+id/lich_su_thanh_toan"/>
+
+    <item
+        android:id="@+id/trang_ca_nhan"
+        android:icon="@drawable/ic_baseline_account_circle"
+        android:title="@string/profile"/>
+
+</menu>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:textStyle="bold"
+        android:textColor="@color/colorBackground"
+        android:layout_margin="10dp"
+        android:textSize="40sp"
+        android:text="@string/signIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textSize="18sp"
+        android:textColor="@color/colorBackground"
+        android:layout_margin="10dp"
+        android:text="@string/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textSize="18sp"
+        android:textColor="@color/colorBackground"
+        android:layout_margin="10dp"
+        android:text="@string/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/edittext_sodienthoai_or_email"
+        android:background="@drawable/custom_background_edittext"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:hint="@string/hint_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textSize="18sp"
+        android:textColor="@color/colorBackground"
+        android:layout_margin="10dp"
+        android:text="@string/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:inputType="textPassword"
+        android:id="@+id/edittext_matkhau"
+        android:background="@drawable/custom_background_edittext"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:hint="@string/hint_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/button_dangnhap"
+        android:textAllCaps="false"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/custom_button_dangnhap"
+        android:text="@string/signIn"
+        android:layout_gravity="end"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

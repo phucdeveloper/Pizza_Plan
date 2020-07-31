@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="switch_home">
+        <item>@string/signIn</item>
+        <item>@string/signUp</item>
+    </string-array>
+</resources>

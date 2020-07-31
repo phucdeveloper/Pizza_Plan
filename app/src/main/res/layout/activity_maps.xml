@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:id="@+id/edittext_timkiemvitri"
+            android:padding="5dp"
+            android:background="@color/colorBackground"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:hint="@string/location"
+            android:layout_width="0dp"
+            android:layout_height="50dp"/>
+
+        <Button
+            android:id="@+id/button_chon"
+            android:textColor="@color/colorBackground"
+            android:text="@string/chon"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/custom_button_chon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">Pizza Plan</string>
+    <string name="category">Category</string>
+    <string name="view_more">Xem thêm</string>
+
+
+    <string name="name_dish">Tên món ăn:</string>
+    <string name="name">Beef BBQ Pizza</string>
+
+    <string name="price_dish">Giá:</string>
+    <string name="price">80.000đ</string>
+
+    <string name="material_dish">Nguyên liệu:</string>
+    <string name="material">Bò xay nấu sốt BBQ, sốt cà chua, phomai Mozzarella.</string>
+
+    <string name="add_to_cart">Add to cart</string>
+    <string name="your_cart">Giỏ hàng của bạn</string>
+    <string name="total">Tổng tiền :</string>
+    <string name="payment">Thanh toán</string>
+    <string name="payment_history">Lịch sử thanh toán</string>
+
+    //menu app
+    <string name="menu">Menu order</string>
+    <string name="store">Cửa hàng</string>
+    <string name="profile">Trang cá nhân</string>
+    <string name="search">Tìm kiếm</string>
+    <string name="hint_search">Nhập tên món ăn cần tìm</string>
+    <string name="history_search">Lịch sử tìm kiếm</string>
+
+    <string name="popular">Các món Pizza phổ biến</string>
+    <string name="trending">Xu hướng</string>
+
+    <string name="chon">Chọn</string>
+
+    <string name="signIn">Đăng nhập</string>
+    <string name="signUp">Đăng ký</string>
+    <string name="hint_email">Số điện thoại hoặc email</string>
+    <string name="hint_password">Nhập mật khẩu</string>
+    <string name="email">Địa chỉ email :</string>
+    <string name="email_demo">abc123@gmail.com</string>
+    <string name="password">Mật khẩu :</string>
+    <string name="text">Xin hãy nhập đầy đủ thông tin của bạn vào phía dưới để đăng nhập.</string>
+    <string name="username">Họ tên người dùng :</string>
+    <string name="hint_nickname">Nhập tên người dùng</string>
+    <string name="hint_firstname">Họ</string>
+    <string name="hint_lastname">Tên</string>
+    <string name="birthday">Ngày sinh :</string>
+    <string name="sex">Giới tính :</string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
+    <string name="address">Địa chỉ :</string>
+    <string name="hint_address">Nhập địa chỉ</string>
+    <string name="update">Cập nhật</string>
+
+    <string name="order_cofirmation">Xác nhận đặt hàng</string>
+    <string name="infor_order">Thông tin đặt hàng</string>
+    <string name="your_infor">Thông tin của bạn</string>
+    <string name="my">My</string>
+    <string name="order">Order</string>
+    <string name="datetime">27/7/2017</string>
+    <string name="time">7:17</string>
+    <string name="order_number">ID order của bạn :</string>
+    <string name="number">1334345463</string>
+    <string name="delivery_time">Thời gian giao hàng :</string>
+    <string name="delivery">30 phút</string>
+    <string name="payment_method">Phương thức thanh toán :</string>
+    <string name="method">Thẻ ATM</string>
+    <string name="continue_manipulation">Tiếp tục</string>
+    <string name="dishs">Các món ăn</string>
+    <string name="delete">Xoá</string>
+    <string name="detail_dish">Thông tin chi tiết món ăn</string>
+    <string name="location">Nhập vị trí bạn muốn tìm kiếm</string>
+
+
+    <string name="signOut">Đăng xuất</string>
+
+
+    <string name="maps_api_key">AIzaSyAzQdjNBju0hc0WmtV4aJDAU-2K1bdg4_I</string>
+    <string name="title_activity_maps">Map</string>
+</resources>
