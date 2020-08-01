@@ -1,6 +1,7 @@
 package com.philipstudio.pizzaplan.view;
 
 import androidx.fragment.app.FragmentActivity;
+
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -61,22 +62,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnMapClickListener(this);
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
-
     }
 
     @Override
-    public void onMapClick(LatLng latLng) {
-        showMarkerInGoogleMap(latLng, "Current Marker");
+    public void onMapClick(final LatLng latLng) {
+        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+        try {
+            List<Address> listAddress = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            if (listAddress != null && listAddress.size() > 0) {
+                Address address = listAddress.get(0);
+                result = address.getAddressLine(0) + ", " + address.getLocality();
+                edtTimKiem.setText(result);
+                LatLng latLng1 = new LatLng(address.getLatitude(), address.getLongitude());
+                showMarkerInGoogleMap(latLng1, result);
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showMarkerInGoogleMap(LatLng latLng, String text) {
         mMap.clear();
         mMap.addMarker(new MarkerOptions().position(latLng).title(text));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18.0f));
     }
-
 }
