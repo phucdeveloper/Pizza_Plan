@@ -109,8 +109,7 @@ public class DangKyFragment extends Fragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.button_dangky:
-                    Toast.makeText(getContext(), ngay + ", " + thang + ", " + nam, Toast.LENGTH_SHORT).show();
-             //       dangkyTaiKhoan(edtEmailOrPhonenumber.getText().toString(), edtMatkhau.getText().toString(), edtHo.getText().toString() + " " + edtTen.getText().toString(), ngay + "/" + thang + "/" + nam, gioitinh);
+                    dangkyTaiKhoan(edtEmailOrPhonenumber.getText().toString(), edtMatkhau.getText().toString(), edtHo.getText().toString() + " " + edtTen.getText().toString(), ngay + "/" + thang + "/" + nam, gioitinh);
                     break;
                 case R.id.radio_button_nam:
                     gioitinh = rBNam.getText().toString();
