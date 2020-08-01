@@ -1,166 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/signUp"
-        android:textColor="@color/colorBackground"
-        android:textSize="40sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:text="@string/email"
-        android:textSize="18sp"
-        android:textColor="@color/colorBackground"
-        android:layout_margin="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-
-    <EditText
-        android:id="@+id/edittext_sodienthoai_or_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/custom_background_edittext"
-        android:hint="@string/hint_email" />
-
-    <TextView
-        android:text="@string/password"
-        android:textSize="18sp"
-        android:textColor="@color/colorBackground"
-        android:layout_margin="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <EditText
-        android:id="@+id/edittext_matkhau"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/custom_background_edittext"
-        android:hint="@string/hint_password" />
-
-    <TextView
-        android:text="@string/username"
-        android:textSize="18sp"
-        android:textColor="@color/colorBackground"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
-        android:layout_margin="10dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/signUp"
+            android:textColor="@color/colorBackground"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:text="@string/email"
+            android:textSize="18sp"
+            android:textColor="@color/colorBackground"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
 
         <EditText
-            android:id="@+id/edittext_ho"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
+            android:id="@+id/edittext_sodienthoai_or_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/custom_background_edittext"
-            android:hint="@string/hint_firstname" />
+            android:hint="@string/hint_email" />
+
+        <TextView
+            android:text="@string/password"
+            android:textSize="18sp"
+            android:textColor="@color/colorBackground"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <EditText
-            android:id="@+id/edittext_ten"
-            android:layout_marginStart="5dp"
-            android:layout_weight="1"
+            android:id="@+id/edittext_matkhau"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/custom_background_edittext"
-            android:hint="@string/hint_lastname" />
-    </LinearLayout>
+            android:hint="@string/hint_password" />
 
-    <TextView
-        android:text="@string/birthday"
-        android:textSize="18sp"
-        android:textColor="@color/colorBackground"
-        android:layout_marginStart="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Spinner
-            android:background="@drawable/custom_spinner"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:id="@+id/spinner_ngay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <Spinner
-            android:background="@drawable/custom_spinner"
-            android:layout_marginEnd="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_weight="1"
-            android:id="@+id/spinner_thang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <Spinner
-            android:background="@drawable/custom_spinner"
-            android:layout_marginStart="5dp"
-            android:layout_weight="1"
-            android:id="@+id/spinner_nam"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
-    <TextView
-        android:layout_marginBottom="10dp"
-        android:text="@string/sex"
-        android:textSize="18sp"
-        android:textColor="@color/colorBackground"
-        android:layout_marginStart="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <RadioGroup
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <RadioButton
-            android:id="@+id/radio_button_nam"
+        <TextView
+            android:text="@string/username"
+            android:textSize="18sp"
             android:textColor="@color/colorBackground"
-            android:text="@string/male"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <RadioButton
-            android:id="@+id/radio_button_nu"
-            android:textColor="@color/colorBackground"
-            android:layout_marginStart="20dp"
-            android:text="@string/female"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RadioGroup>
 
-    <Button
-        android:id="@+id/button_dangky"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/custom_button_dangnhap"
-        android:text="@string/signUp"
-        android:textAllCaps="false" />
-</LinearLayout>
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edittext_ho"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_background_edittext"
+                android:hint="@string/hint_firstname" />
+
+            <EditText
+                android:id="@+id/edittext_ten"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_background_edittext"
+                android:hint="@string/hint_lastname" />
+        </LinearLayout>
+
+        <TextView
+            android:text="@string/birthday"
+            android:textSize="18sp"
+            android:textColor="@color/colorBackground"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:background="@drawable/custom_spinner"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:id="@+id/spinner_ngay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:background="@drawable/custom_spinner"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:id="@+id/spinner_thang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:background="@drawable/custom_spinner"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:id="@+id/spinner_nam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:text="@string/sex"
+            android:textSize="18sp"
+            android:textColor="@color/colorBackground"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioGroup
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/radio_button_nam"
+                android:textColor="@color/colorBackground"
+                android:text="@string/male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <RadioButton
+                android:id="@+id/radio_button_nu"
+                android:textColor="@color/colorBackground"
+                android:layout_marginStart="20dp"
+                android:text="@string/female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RadioGroup>
+
+        <Button
+            android:layout_marginBottom="20dp"
+            android:id="@+id/button_dangky"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/custom_button_dangnhap"
+            android:text="@string/signUp"
+            android:textAllCaps="false" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
