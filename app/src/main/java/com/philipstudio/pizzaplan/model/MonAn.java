@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 @IgnoreExtraProperties
 public class MonAn implements Serializable {
+    private String idMonAn;
     private String tenMonAn;
     private String anh;
     private String nguyenLieu;
@@ -13,11 +14,16 @@ public class MonAn implements Serializable {
 
     public MonAn(){}
 
-    public MonAn(String tenMonAn, String anh, String nguyenLieu, double gia) {
+    public MonAn(String idMonAn, String tenMonAn, String anh, String nguyenLieu, double gia) {
+        this.idMonAn = idMonAn;
         this.tenMonAn = tenMonAn;
         this.anh = anh;
         this.nguyenLieu = nguyenLieu;
         this.gia = gia;
+    }
+
+    public String getIdMonAn() {
+        return idMonAn;
     }
 
     public String getTenMonAn() {

@@ -45,7 +45,7 @@ public class MenuOrderFragment extends Fragment {
         rViewDanhSachMonAn = view.findViewById(R.id.recyclerview_danhsach_monan);
         imageBadgeViewGioHang = view.findViewById(R.id.imagebadgeview_giohang);
 
-        setUpShimmerRecyclerView(rViewDanhSachMonAn);
+        setUpRecyclerView(rViewDanhSachMonAn);
 
         setUpDanhSachMonAn(rViewDanhSachMonAn);
 
@@ -87,11 +87,11 @@ public class MenuOrderFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        setUpShimmerRecyclerView(rViewDanhSachMonAn);
+        setUpRecyclerView(rViewDanhSachMonAn);
         setUpDanhSachMonAn(rViewDanhSachMonAn);
     }
 
-    private void setUpShimmerRecyclerView(RecyclerView recyclerView) {
+    private void setUpRecyclerView(RecyclerView recyclerView) {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
