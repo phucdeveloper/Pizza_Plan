@@ -7,4 +7,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MyCustomQRTheme" parent="SdkQRTheme">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorButtonNormal">@android:color/white</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    </style>
+
 </resources>

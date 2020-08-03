@@ -70,5 +70,13 @@ dependencies {
     implementation 'com.robertlevonyan.view:MaterialChipView:2.0.4'
     implementation 'com.beloo.widget:ChipsLayoutManager:0.3.7@aar'
 
+    //các thư viện cần khai báo để SDK có thể hoạt động
+  //  implementation 'androidx.appcompat:appcompat:25.3.1'
+    implementation 'com.google.code.gson:gson:2.8.6'
+ //   implementation 'com.google.android.material:material-rc01:25.3.1'
+
+    //include SDK
+    compile(name: 'VnpayQR-1.0.0', ext: 'aar')
+
 }
 apply plugin: 'com.google.gms.google-services'

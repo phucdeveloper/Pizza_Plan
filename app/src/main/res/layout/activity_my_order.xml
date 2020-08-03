@@ -296,9 +296,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
-                    android:id="@+id/button_tieptuc"
+                    android:id="@+id/button_thanhtoan"
                     android:textColor="@color/colorPrimary"
-                    android:text="@string/continue_manipulation"
+                    android:text="@string/payment"
                     android:background="@drawable/custom_button_continue"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"

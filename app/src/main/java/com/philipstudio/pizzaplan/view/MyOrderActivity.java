@@ -21,6 +21,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.philipstudio.pizzaplan.R;
 import com.philipstudio.pizzaplan.model.NguoiDung;
 import com.philipstudio.pizzaplan.utils.NguoiDungUtils;
+import com.vnpay.qr.VnpayQRReturnEntity;
+import com.vnpay.qr.activity.QRActivity;
+import com.vnpay.qr.utils.Constants;
+import com.vnpay.qr.utils.VNPAYTags;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,6 +44,7 @@ public class MyOrderActivity extends AppCompatActivity {
     double tongtienhoadon;
     String diachi;
     static final int REQUEST_CODE_GET_LOACTION_SUCCESS = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +53,7 @@ public class MyOrderActivity extends AppCompatActivity {
         initView();
 
         final Intent intent = getIntent();
-        if (intent != null){
+        if (intent != null) {
             tongtienhoadon = intent.getDoubleExtra("tongtien", 100);
             thietLapThongTinHoaDon(tongtienhoadon);
         }
@@ -72,10 +77,10 @@ public class MyOrderActivity extends AppCompatActivity {
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.button_tieptuc:
-                    Intent intent1 = new Intent(MyOrderActivity.this, ThanhToanActivity.class);
-                    startActivity(intent1);
+            switch (v.getId()) {
+                case R.id.button_thanhtoan:
+                    QRActivity.setupQR(MyOrderActivity.this, VNPAYTags.CURRENCY_TYPE1,
+                            "http://mobile.vnpay.vn/IVB/Merchant.html", VNPAYTags.LANG_VN, R.style.MyCustomQRTheme);
                     break;
                 case R.id.button_menuorder:
                     Intent intent2 = new Intent(MyOrderActivity.this, HomeActivity.class);
@@ -90,7 +95,7 @@ public class MyOrderActivity extends AppCompatActivity {
         }
     };
 
-    private void showGoogleMapDeLayDiaChiGiaoHang(){
+    private void showGoogleMapDeLayDiaChiGiaoHang() {
         Intent intent = new Intent(MyOrderActivity.this, MapsActivity.class);
         startActivityForResult(intent, REQUEST_CODE_GET_LOACTION_SUCCESS);
     }
@@ -98,15 +103,22 @@ public class MyOrderActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_GET_LOACTION_SUCCESS && data != null){
-            diachi = data.getStringExtra("diachi");
-            edtDiachi.setText(diachi);
+        if (resultCode == RESULT_OK){
+            if(requestCode == REQUEST_CODE_GET_LOACTION_SUCCESS && data != null) {
+                diachi = data.getStringExtra("diachi");
+                edtDiachi.setText(diachi);
+            }
+            else if (requestCode == VNPAYTags.REQUEST_VNPAY_QR && data != null){
+                String dataV = data.getStringExtra(VNPAYTags.QR_RESPONSE);
+                VnpayQRReturnEntity returnEntity = Constants.g().getGsonInstance().fromJson(dataV, VnpayQRReturnEntity.class); // Sử dụng Gson parse lại Entity từ Dữ liệu SDK
+            }
         }
+
 
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void thietLapThongTinHoaDon(double number){
+    private void thietLapThongTinHoaDon(double number) {
         String idOrder = String.valueOf(System.currentTimeMillis());
         txtIDOrder.setText(idOrder);
 
@@ -119,13 +131,13 @@ public class MyOrderActivity extends AppCompatActivity {
         txtTongtien.setText(String.valueOf(number));
     }
 
-    private void hienThiThongTinNguoiDung(final TextView textView, final EditText editText){
+    private void hienThiThongTinNguoiDung(final TextView textView, final EditText editText) {
         String idNguoiDung = nguoiDungUtils.getIdUser();
         dataRef.child(idNguoiDung).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 NguoiDung nguoiDung = snapshot.getValue(NguoiDung.class);
-                if (nguoiDung != null){
+                if (nguoiDung != null) {
                     textView.setText(nguoiDung.getTennguoidung());
                     editText.setText(nguoiDung.getEmailorPhoneNumber());
                 }
@@ -138,7 +150,7 @@ public class MyOrderActivity extends AppCompatActivity {
         });
     }
 
-    private void initView(){
+    private void initView() {
         txtTenNguoiDung = findViewById(R.id.textview_tennguoidung);
         txtNgayThang = findViewById(R.id.textview_ngaythang);
         txtGiophut = findViewById(R.id.textview_giophut);
@@ -150,7 +162,7 @@ public class MyOrderActivity extends AppCompatActivity {
         edtThoigiangiaohang = findViewById(R.id.edittext_thoigiangiaohang);
         edtEmailOrPhonenumber = findViewById(R.id.edittext_diachilienhe);
 
-        btnTieptuc = findViewById(R.id.button_tieptuc);
+        btnTieptuc = findViewById(R.id.button_thanhtoan);
         btnMenuorder = findViewById(R.id.button_menuorder);
 
         imgButtonGooglemap = findViewById(R.id.imagebutton_googlemap);
