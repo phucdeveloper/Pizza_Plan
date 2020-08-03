@@ -76,7 +76,7 @@ dependencies {
  //   implementation 'com.google.android.material:material-rc01:25.3.1'
 
     //include SDK
-    compile(name: 'VnpayQR-1.0.0', ext: 'aar')
+    implementation(name: 'VnpayQR-1.0.0', ext: 'aar')
 
 }
 apply plugin: 'com.google.gms.google-services'
