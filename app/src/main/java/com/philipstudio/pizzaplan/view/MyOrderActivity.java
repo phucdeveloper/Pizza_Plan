@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -111,6 +112,7 @@ public class MyOrderActivity extends AppCompatActivity {
             else if (requestCode == VNPAYTags.REQUEST_VNPAY_QR && data != null){
                 String dataV = data.getStringExtra(VNPAYTags.QR_RESPONSE);
                 VnpayQRReturnEntity returnEntity = Constants.g().getGsonInstance().fromJson(dataV, VnpayQRReturnEntity.class); // Sử dụng Gson parse lại Entity từ Dữ liệu SDK
+                Toast.makeText(MyOrderActivity.this, "Thanh toán thành công " + returnEntity.getAmount(), Toast.LENGTH_SHORT).show();
             }
         }
 
