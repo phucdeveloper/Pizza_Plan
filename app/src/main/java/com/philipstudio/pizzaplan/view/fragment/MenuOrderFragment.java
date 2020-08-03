@@ -1,5 +1,6 @@
 package com.philipstudio.pizzaplan.view.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -51,19 +52,20 @@ public class MenuOrderFragment extends Fragment {
 
         NguoiDungUtils nguoiDungUtils = new NguoiDungUtils(getContext());
         String idNguoiDung = nguoiDungUtils.getIdUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
         dateRef = firebaseDatabase.getReference().child("GioHang");
         dateRef.child(idNguoiDung).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<GioHang> arrayList = new ArrayList<>();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     GioHang gioHang = dataSnapshot.getValue(GioHang.class);
                     arrayList.add(gioHang);
                 }
 
-                int soluong = arrayList.size();
-                imageBadgeViewGioHang.setBadgeValue(soluong)
-                        .setBadgeBackground(getResources().getDrawable(R.drawable.custom_background_badgeview));
+                    int soluong = arrayList.size();
+                    imageBadgeViewGioHang.setBadgeValue(soluong)
+                            .setBadgeBackground(getResources().getDrawable(R.drawable.custom_background_badgeview));
 
             }
 
@@ -72,6 +74,7 @@ public class MenuOrderFragment extends Fragment {
 
             }
         });
+
 
         imageBadgeViewGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +92,31 @@ public class MenuOrderFragment extends Fragment {
 
         setUpRecyclerView(rViewDanhSachMonAn);
         setUpDanhSachMonAn(rViewDanhSachMonAn);
+
+//        NguoiDungUtils nguoiDungUtils = new NguoiDungUtils(getContext());
+//        String idNguoiDung = nguoiDungUtils.getIdUser();
+//        firebaseDatabase = FirebaseDatabase.getInstance();
+//        dateRef = firebaseDatabase.getReference().child("GioHang");
+//        dateRef.child(idNguoiDung).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                ArrayList<GioHang> arrayList = new ArrayList<>();
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    GioHang gioHang = dataSnapshot.getValue(GioHang.class);
+//                    arrayList.add(gioHang);
+//                }
+//
+//                    int soluong = arrayList.size();
+//                    imageBadgeViewGioHang.setBadgeValue(soluong)
+//                            .setBadgeBackground(getResources().getDrawable(R.drawable.custom_background_badgeview));
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
     }
 
     private void setUpRecyclerView(RecyclerView recyclerView) {
@@ -104,7 +132,7 @@ public class MenuOrderFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<MonAn> monAnArrayList = new ArrayList<>();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     MonAn monAn = dataSnapshot.getValue(MonAn.class);
                     monAnArrayList.add(monAn);
                 }

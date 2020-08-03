@@ -31,7 +31,7 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
     Button btnGiohang;
     Toolbar toolbar;
 
-    int dem = 0, number = 0, dem1 = 0;
+    int dem = 0, number = 0;
     MonAn monAn;
     NguoiDungUtils nguoiDungUtils;
 
