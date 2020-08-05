@@ -85,16 +85,16 @@ public class CuaHangFragment extends Fragment implements OnMapReadyCallback, Goo
         showMarkerInGoogleMap(latLng6, "56 Đường Khánh Hội, phường 4, Quận 4, Hồ Chí Minh");
     }
 
-    public void showCameraToPosition(LatLng position, float zoomLevel) {
-        CameraPosition cameraPosition = CameraPosition.builder()
-                .target(position)
-                .zoom(zoomLevel)
-                .bearing(0.0f)
-                .tilt(0.0f)
-                .build();
-
-        if (mGoogleMap != null) {
-            mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), null);
-        }
-    }
+//    private void showCameraToPosition(LatLng position, float zoomLevel) {
+//        CameraPosition cameraPosition = CameraPosition.builder()
+//                .target(position)
+//                .zoom(zoomLevel)
+//                .bearing(0.0f)
+//                .tilt(0.0f)
+//                .build();
+//
+//        if (mGoogleMap != null) {
+//            mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), null);
+//        }
+//    }
 }

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "355803197556",
+    "firebase_url": "https://pizza-plan-d64eb.firebaseio.com",
+    "project_id": "pizza-plan-d64eb",
+    "storage_bucket": "pizza-plan-d64eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355803197556:android:202814141ba17ed2cf6121",
+        "android_client_info": {
+          "package_name": "com.philipstudio.pizzaplan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "355803197556-v0nvdrsn45545prh5698btl6vu5cvflc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYvhflWiw6nB7r2jAl7qs3SQAe3J4HVuY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355803197556-v0nvdrsn45545prh5698btl6vu5cvflc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
