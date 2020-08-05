@@ -47,8 +47,8 @@
                 <Button
                     android:textAlignment="center"
                     android:padding="10dp"
-                    android:text="Tìm kiếm"
-                    android:background="@color/colorAccent"
+                    android:text="Chỉ đường"
+                    android:background="@drawable/custom_button_chon"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>

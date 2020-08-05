@@ -67,7 +67,7 @@ public class CuaHangFragment extends Fragment implements OnMapReadyCallback, Goo
 
     private void showMarkerInGoogleMap(LatLng latLng, String title) {
         mGoogleMap.addMarker(new MarkerOptions().position(latLng).title(title));
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18.0f));
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.5f));
     }
 
     private void setUpViTriCacCuaHang() {

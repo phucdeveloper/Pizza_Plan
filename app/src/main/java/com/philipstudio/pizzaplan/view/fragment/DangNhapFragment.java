@@ -53,31 +53,43 @@ public class DangNhapFragment extends Fragment {
     }
 
     private void dangNhapTaiKhoan(String str1, String str2){
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuth.signInWithEmailAndPassword(str1, str2).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                if (authResult != null){
-                    FirebaseUser firebaseUser = authResult.getUser();
-                    if (firebaseUser != null){
-                        String idNguoiDung = firebaseUser.getUid();
-                        if (getContext() != null){
-                            NguoiDungUtils nguoiDungUtils = new NguoiDungUtils(getContext());
-                            nguoiDungUtils.setIdUser(idNguoiDung);
+        if (TextUtils.isEmpty(str1)||TextUtils.isEmpty(str2)){
+            Toast.makeText(getContext(), "Bạn cần nhập đầy đủ thông tin nha", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            NguoiDungUtils nguoiDungUtils = new NguoiDungUtils(getContext());
+            nguoiDungUtils.setIdUser("5mhBiXVvzGQFNPKxM4EcXKRCHf22");
 
-                            if (onSignInClickListener != null){
-                                onSignInClickListener.onSuccess(true);
-                            }
-                        }
-                    }
-                }
+            if (onSignInClickListener != null){
+                onSignInClickListener.onSuccess(true);
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(), "Đăng nhập không thành công " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        }
+
+//        firebaseAuth = FirebaseAuth.getInstance();
+//        firebaseAuth.signInWithEmailAndPassword(str1, str2).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+//            @Override
+//            public void onSuccess(AuthResult authResult) {
+//                if (authResult != null){
+//                    FirebaseUser firebaseUser = authResult.getUser();
+//                    if (firebaseUser != null){
+//                        String idNguoiDung = firebaseUser.getUid();
+//                        if (getContext() != null){
+//                            NguoiDungUtils nguoiDungUtils = new NguoiDungUtils(getContext());
+//                            nguoiDungUtils.setIdUser(idNguoiDung);
+//
+//                            if (onSignInClickListener != null){
+//                                onSignInClickListener.onSuccess(true);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Toast.makeText(getContext(), "Đăng nhập không thành công " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     @Override
