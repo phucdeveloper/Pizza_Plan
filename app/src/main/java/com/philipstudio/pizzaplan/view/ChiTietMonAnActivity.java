@@ -23,6 +23,9 @@ import com.philipstudio.pizzaplan.model.GioHang;
 import com.philipstudio.pizzaplan.model.MonAn;
 import com.philipstudio.pizzaplan.utils.NguoiDungUtils;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 public class ChiTietMonAnActivity extends AppCompatActivity {
 
     TextView txtTenMonAn, txtGia, txtNguyenlieu, txtSoluong;
@@ -49,7 +52,10 @@ public class ChiTietMonAnActivity extends AppCompatActivity {
             monAn = (MonAn) intent.getSerializableExtra("dataMonAn");
             if (monAn != null) {
                 txtTenMonAn.setText(monAn.getTenMonAn());
-                txtGia.setText(String.valueOf(monAn.getGia()));
+                NumberFormat formatter = new DecimalFormat("#,###");
+                double giatien = monAn.getGia();
+                String formattedGiatien = formatter.format(giatien);
+                txtGia.setText(formattedGiatien + " " + "đồng");
                 txtNguyenlieu.setText(monAn.getNguyenLieu());
                 Glide.with(ChiTietMonAnActivity.this).load(monAn.getAnh()).into(imgAnh);
                 txtSoluong.setText(String.valueOf(dem));

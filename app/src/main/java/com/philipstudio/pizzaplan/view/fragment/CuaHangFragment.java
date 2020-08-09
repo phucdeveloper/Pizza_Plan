@@ -16,7 +16,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.philipstudio.pizzaplan.R;
@@ -84,17 +83,4 @@ public class CuaHangFragment extends Fragment implements OnMapReadyCallback, Goo
         LatLng latLng6 = new LatLng(10.757893, 106.700130);
         showMarkerInGoogleMap(latLng6, "56 Đường Khánh Hội, phường 4, Quận 4, Hồ Chí Minh");
     }
-
-//    private void showCameraToPosition(LatLng position, float zoomLevel) {
-//        CameraPosition cameraPosition = CameraPosition.builder()
-//                .target(position)
-//                .zoom(zoomLevel)
-//                .bearing(0.0f)
-//                .tilt(0.0f)
-//                .build();
-//
-//        if (mGoogleMap != null) {
-//            mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), null);
-//        }
-//    }
 }

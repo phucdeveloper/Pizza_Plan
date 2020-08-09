@@ -1,5 +1,7 @@
 package com.philipstudio.pizzaplan.view.fragment;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,7 +42,7 @@ public class TimKiemFragment extends Fragment {
 
     EditText edtNhapTukhoa;
     RecyclerView rVDanhsachketqua, rVDanhSachTuKhoa;
-    TextView txtXoaLichSu, txtCacMonAn;
+    TextView txtXoaLichSu;
     RelativeLayout relativeLayout;
     AvatarImageView avatarImageView;
 
@@ -88,10 +91,16 @@ public class TimKiemFragment extends Fragment {
                     } else {
                         themTuKhoaVaoLichSuTimKiem(id, tukhoa);
                         timKiemVaHienThiKetQua(tukhoa);
-                        txtCacMonAn.setVisibility(View.VISIBLE);
                     }
                 }
                 return true;
+            }
+        });
+
+        txtXoaLichSu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertDialog(getContext());
             }
         });
 
@@ -186,11 +195,33 @@ public class TimKiemFragment extends Fragment {
         rVDanhsachketqua.setAdapter(ketQuaAdapter);
     }
 
+    private void showAlertDialog(Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Thông báo")
+                .setMessage("Bạn có muốn xoá tất cả lịch sử tìm kiếm của mình không ?");
+        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.setPositiveButton("Có, đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dataLichSuTimKiemRef = firebaseDatabase.getReference().child("LichSuTimKiem");
+                dataLichSuTimKiemRef.removeValue();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
     private void initView(View view) {
         rVDanhsachketqua = view.findViewById(R.id.recyclerview_danhsach_ketqua);
         edtNhapTukhoa = view.findViewById(R.id.edittext_nhaptukhoa);
         txtXoaLichSu = view.findViewById(R.id.textview_xoalichsu);
-        txtCacMonAn = view.findViewById(R.id.textview1);
         relativeLayout = view.findViewById(R.id.layout);
         avatarImageView = view.findViewById(R.id.avatarimageview_anhdaidien);
         rVDanhSachTuKhoa = view.findViewById(R.id.recyclerview_danhsach_tukhoatimkiem);
@@ -201,6 +232,5 @@ public class TimKiemFragment extends Fragment {
         nguoiDungUtils = new NguoiDungUtils(getContext());
 
         relativeLayout.setVisibility(View.GONE);
-        txtCacMonAn.setVisibility(View.GONE);
     }
 }

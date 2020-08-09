@@ -22,6 +22,8 @@ import com.philipstudio.pizzaplan.adapter.GioHangAdapter;
 import com.philipstudio.pizzaplan.model.GioHang;
 import com.philipstudio.pizzaplan.utils.NguoiDungUtils;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class GioHangActivity extends AppCompatActivity {
@@ -101,7 +103,9 @@ public class GioHangActivity extends AppCompatActivity {
             tongtien = tongtien + giatien * soluong;
         }
 
-        txtTongtien.setText(String.valueOf(tongtien));
+        NumberFormat formatter = new DecimalFormat("#,###");
+        String formattedGiatien = formatter.format(tongtien);
+        txtTongtien.setText(formattedGiatien + " " + "đồng");
         tongtienmonan = tongtien;
     }
 

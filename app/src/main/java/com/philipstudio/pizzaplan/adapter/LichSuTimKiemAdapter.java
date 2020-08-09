@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.philipstudio.pizzaplan.R;
 import com.robertlevonyan.views.chip.Chip;
+import com.robertlevonyan.views.chip.OnCloseClickListener;
 
 import java.util.ArrayList;
 
@@ -46,6 +47,13 @@ public class LichSuTimKiemAdapter extends RecyclerView.Adapter<LichSuTimKiemAdap
                 if (onItemChipCliclListener != null){
                     onItemChipCliclListener.onItem(arrayList.get(position));
                 }
+            }
+        });
+
+        holder.chip.setOnCloseClickListener(new OnCloseClickListener() {
+            @Override
+            public void onCloseClick(View v) {
+                arrayList.remove(position);
             }
         });
     }

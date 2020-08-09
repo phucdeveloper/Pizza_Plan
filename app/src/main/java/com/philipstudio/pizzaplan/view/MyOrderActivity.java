@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Api;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +29,8 @@ import com.vnpay.qr.activity.QRActivity;
 import com.vnpay.qr.utils.Constants;
 import com.vnpay.qr.utils.VNPAYTags;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -72,7 +76,6 @@ public class MyOrderActivity extends AppCompatActivity {
         btnTieptuc.setOnClickListener(listener);
         imgButtonGooglemap.setOnClickListener(listener);
 
-
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -90,6 +93,7 @@ public class MyOrderActivity extends AppCompatActivity {
                     break;
 
                 case R.id.imagebutton_googlemap:
+
                     showGoogleMapDeLayDiaChiGiaoHang();
                     break;
             }
@@ -111,8 +115,11 @@ public class MyOrderActivity extends AppCompatActivity {
             }
             else if (requestCode == VNPAYTags.REQUEST_VNPAY_QR && data != null){
                 String dataV = data.getStringExtra(VNPAYTags.QR_RESPONSE);
+                Log.d("phuc", dataV);
                 VnpayQRReturnEntity returnEntity = Constants.g().getGsonInstance().fromJson(dataV, VnpayQRReturnEntity.class); // Sử dụng Gson parse lại Entity từ Dữ liệu SDK
-                Toast.makeText(MyOrderActivity.this, "Thanh toán thành công " + returnEntity.getAmount(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, ThanhToanActivity.class);
+                Log.d("phuc", returnEntity.getAmount());
+                startActivity(intent);
             }
         }
 
@@ -130,7 +137,9 @@ public class MyOrderActivity extends AppCompatActivity {
         String giophut = new SimpleDateFormat("HH:mm").format(new Date());
         txtGiophut.setText(giophut);
 
-        txtTongtien.setText(String.valueOf(number));
+        NumberFormat formatter = new DecimalFormat("#,###");
+        String formattedGiatien = formatter.format(number);
+        txtTongtien.setText(formattedGiatien + " " + "đồng");
     }
 
     private void hienThiThongTinNguoiDung(final TextView textView, final EditText editText) {

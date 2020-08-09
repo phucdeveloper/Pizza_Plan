@@ -20,6 +20,8 @@ import com.philipstudio.pizzaplan.R;
 import com.philipstudio.pizzaplan.model.GioHang;
 import com.philipstudio.pizzaplan.utils.NguoiDungUtils;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHolder> {
@@ -50,7 +52,10 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
 
         Glide.with(context).load(arrayList.get(position).getMonAn().getAnh()).into(holder.imgAnh);
         holder.txtTenMonAn.setText(arrayList.get(position).getMonAn().getTenMonAn());
-        holder.txtGia.setText(String.valueOf(arrayList.get(position).getMonAn().getGia()));
+        NumberFormat formatter = new DecimalFormat("#,###");
+        double giatien = arrayList.get(position).getMonAn().getGia();
+        String formattedGiatien = formatter.format(giatien);
+        holder.txtGia.setText(formattedGiatien + " " + "đồng");
         holder.txtNguyenlieu.setText(arrayList.get(position).getMonAn().getNguyenLieu());
 
         holder.txtSoluong.setText(String.valueOf(arrayList.get(position).getSoluong()));

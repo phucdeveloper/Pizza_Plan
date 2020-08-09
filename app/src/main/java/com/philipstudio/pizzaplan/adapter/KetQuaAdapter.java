@@ -1,6 +1,7 @@
 package com.philipstudio.pizzaplan.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.philipstudio.pizzaplan.R;
 import com.philipstudio.pizzaplan.model.MonAn;
+import com.philipstudio.pizzaplan.view.ChiTietMonAnActivity;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class KetQuaAdapter extends RecyclerView.Adapter<KetQuaAdapter.ViewHolder> {
@@ -37,7 +41,10 @@ public class KetQuaAdapter extends RecyclerView.Adapter<KetQuaAdapter.ViewHolder
         Glide.with(context).load(arrayList.get(position).getAnh()).into(holder.imgAnh);
         holder.txtTenMonAn.setText(arrayList.get(position).getTenMonAn());
         holder.txtNguyenlieu.setText(arrayList.get(position).getNguyenLieu());
-        holder.txtGia.setText(String.valueOf(arrayList.get(position).getGia()));
+        NumberFormat formatter = new DecimalFormat("#,###");
+        double giatien = arrayList.get(position).getGia();
+        String formattedGiatien = formatter.format(giatien);
+        holder.txtGia.setText(formattedGiatien + " " + "đồng");
     }
 
     @Override
@@ -57,6 +64,17 @@ public class KetQuaAdapter extends RecyclerView.Adapter<KetQuaAdapter.ViewHolder
             txtTenMonAn = itemView.findViewById(R.id.item_textview_tenmonan);
             txtGia = itemView.findViewById(R.id.item_textview_gia);
             txtNguyenlieu = itemView.findViewById(R.id.item_textview_nguyenlieu);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    Intent intent = new Intent(context, ChiTietMonAnActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("dataMonAn", arrayList.get(position));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

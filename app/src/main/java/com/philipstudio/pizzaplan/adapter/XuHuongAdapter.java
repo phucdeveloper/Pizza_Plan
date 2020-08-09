@@ -18,6 +18,8 @@ import com.philipstudio.pizzaplan.R;
 import com.philipstudio.pizzaplan.model.MonAn;
 import com.philipstudio.pizzaplan.view.ChiTietMonAnActivity;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class XuHuongAdapter extends RecyclerView.Adapter<XuHuongAdapter.ViewHolder> {
@@ -40,7 +42,10 @@ public class XuHuongAdapter extends RecyclerView.Adapter<XuHuongAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.txtTenMonAn.setText(arrayList.get(position).getTenMonAn());
-        holder.txtGia.setText(String.valueOf(arrayList.get(position).getGia()));
+        NumberFormat formatter = new DecimalFormat("#,###");
+        double giatien = arrayList.get(position).getGia();
+        String formattedGiatien = formatter.format(giatien);
+        holder.txtGia.setText(formattedGiatien + " " + "đồng");
         Glide.with(context).load(arrayList.get(position).getAnh()).into(holder.imgAnh);
     }
 
