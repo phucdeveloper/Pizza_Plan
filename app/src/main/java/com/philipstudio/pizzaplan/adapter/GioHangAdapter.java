@@ -75,8 +75,10 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
             public void onClick(View v) {
                 int soluong = arrayList.get(position).getSoluong();
                 soluong--;
-                holder.txtSoluong.setText(String.valueOf(soluong));
-                dataRef.child(id).child(arrayList.get(position).getId()).child("soluong").setValue(soluong);
+                if(soluong >= 0){
+                    holder.txtSoluong.setText(String.valueOf(soluong));
+                    dataRef.child(id).child(arrayList.get(position).getId()).child("soluong").setValue(soluong);
+                }
             }
         });
 

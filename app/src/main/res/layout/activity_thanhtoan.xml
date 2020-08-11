@@ -8,14 +8,28 @@
     android:layout_height="match_parent"
     tools:context=".view.ThanhToanActivity">
     <androidx.appcompat.widget.Toolbar
-        android:background="@color/colorBackground"
+        android:background="@color/colorPrimary"
         app:title="@string/payment"
         app:navigationIcon="@drawable/ic_baseline_arrow_back_black"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <View
-        android:background="@color/colorView"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        app:tabBackground="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"/>
+        android:layout_height="wrap_content">
+        <com.google.android.material.tabs.TabItem
+            android:text="Thông tin thanh toán"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.tabs.TabItem
+            android:text="Theo dõi đơn hàng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.tabs.TabLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

@@ -70,6 +70,9 @@
     <string name="delete">Xoá</string>
     <string name="detail_dish">Thông tin chi tiết món ăn</string>
     <string name="location">Nhập vị trí bạn muốn tìm kiếm</string>
+    <string name="order_detail">Chi tiết đặt hàng</string>
+    <string name="date">Thời gian :</string>
+    <string name="delivery_address">Địa chỉ giao hàng</string>
 
 
     <string name="signOut">Đăng xuất</string>

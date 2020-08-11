@@ -84,7 +84,7 @@ public class TimKiemFragment extends Fragment {
         edtNhapTukhoa.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER))||(actionId == EditorInfo.IME_ACTION_DONE)) {
+                if ((event != null) && ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER)||(actionId == EditorInfo.IME_ACTION_SEARCH))) {
                     final String tukhoa = edtNhapTukhoa.getText().toString();
                     if (TextUtils.isEmpty(tukhoa)) {
                         Toast.makeText(getContext(), "Bạn cần phải nhập từ khoá để tìm kiếm", Toast.LENGTH_SHORT).show();
@@ -92,8 +92,9 @@ public class TimKiemFragment extends Fragment {
                         themTuKhoaVaoLichSuTimKiem(id, tukhoa);
                         timKiemVaHienThiKetQua(tukhoa);
                     }
+                    return true;
                 }
-                return true;
+                return false;
             }
         });
 

@@ -20,6 +20,7 @@
                 app:avatarBackgroundColor="@color/colorPrimary" />
 
             <EditText
+                android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:layout_weight="1"
                 android:id="@+id/edittext_nhaptukhoa"

@@ -2,8 +2,10 @@ package com.philipstudio.pizzaplan.model;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
+
 @IgnoreExtraProperties
-public class DonHang {
+public class DonHang implements Serializable {
     private String idDonHang;
     private String idNguoiDung;
     private String thoigian;

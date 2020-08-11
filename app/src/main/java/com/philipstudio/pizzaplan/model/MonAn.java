@@ -22,6 +22,12 @@ public class MonAn implements Serializable {
         this.gia = gia;
     }
 
+    public MonAn(String tenMonAn, String nguyenLieu, double gia) {
+        this.tenMonAn = tenMonAn;
+        this.nguyenLieu = nguyenLieu;
+        this.gia = gia;
+    }
+
     public String getIdMonAn() {
         return idMonAn;
     }

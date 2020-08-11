@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.philipstudio.pizzaplan.R;
+import com.philipstudio.pizzaplan.model.DonHang;
 import com.philipstudio.pizzaplan.model.NguoiDung;
 import com.philipstudio.pizzaplan.utils.NguoiDungUtils;
 import com.vnpay.qr.VnpayQRReturnEntity;
@@ -83,8 +84,19 @@ public class MyOrderActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.button_thanhtoan:
-                    QRActivity.setupQR(MyOrderActivity.this, VNPAYTags.CURRENCY_TYPE1,
-                            "http://mobile.vnpay.vn/IVB/Merchant.html", VNPAYTags.LANG_VN, R.style.MyCustomQRTheme);
+                    String idOrder = txtIDOrder.getText().toString();
+                    String idNguoiDung = nguoiDungUtils.getIdUser();
+                    String thoigian = txtGiophut.getText().toString() + " " + txtNgayThang.getText().toString();
+                    String diadiem = edtDiachi.getText().toString();
+                    String text = txtTongtien.getText().toString();
+                    String[] data = text.split(" ");
+                    double tongtien = Double.parseDouble(data[0]);
+                    DonHang donHang = new DonHang(idOrder, idNguoiDung, thoigian, diadiem, tongtien, "Đang đặt hàng");
+                    Intent intent = new Intent(MyOrderActivity.this, ThanhToanActivity.class);
+                    intent.putExtra("donHang", donHang);
+                    startActivity(intent);
+//                    QRActivity.setupQR(MyOrderActivity.this, VNPAYTags.CURRENCY_TYPE1,
+//                            "http://mobile.vnpay.vn/IVB/Merchant.html", VNPAYTags.LANG_VN, R.style.MyCustomQRTheme);
                     break;
                 case R.id.button_menuorder:
                     Intent intent2 = new Intent(MyOrderActivity.this, HomeActivity.class);
@@ -93,7 +105,6 @@ public class MyOrderActivity extends AppCompatActivity {
                     break;
 
                 case R.id.imagebutton_googlemap:
-
                     showGoogleMapDeLayDiaChiGiaoHang();
                     break;
             }
@@ -115,14 +126,11 @@ public class MyOrderActivity extends AppCompatActivity {
             }
             else if (requestCode == VNPAYTags.REQUEST_VNPAY_QR && data != null){
                 String dataV = data.getStringExtra(VNPAYTags.QR_RESPONSE);
-                Log.d("phuc", dataV);
                 VnpayQRReturnEntity returnEntity = Constants.g().getGsonInstance().fromJson(dataV, VnpayQRReturnEntity.class); // Sử dụng Gson parse lại Entity từ Dữ liệu SDK
-                Intent intent = new Intent(this, ThanhToanActivity.class);
-                Log.d("phuc", returnEntity.getAmount());
-                startActivity(intent);
+//                Intent intent = new Intent(this, ThanhToanActivity.class);
+//                startActivity(intent);
             }
         }
-
 
         super.onActivityResult(requestCode, resultCode, data);
     }
