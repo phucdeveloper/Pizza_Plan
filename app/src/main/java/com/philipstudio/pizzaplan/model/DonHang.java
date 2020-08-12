@@ -13,6 +13,8 @@ public class DonHang implements Serializable {
     private double tongtien;
     private String trangthai;
 
+    public DonHang(){}
+
     public DonHang(String idDonHang, String idNguoiDung, String thoigian, String diadiem, double tongtien, String trangthai) {
         this.idDonHang = idDonHang;
         this.idNguoiDung = idNguoiDung;

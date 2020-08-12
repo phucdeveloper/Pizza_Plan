@@ -40,6 +40,8 @@ public class GioHangActivity extends AppCompatActivity {
     NguoiDungUtils utils;
     double giatien, tongtienmonan;
     int soluong;
+    ArrayList<GioHang> arrayList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +63,13 @@ public class GioHangActivity extends AppCompatActivity {
         btnDathang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("danhSachGioHang", arrayList);
+                bundle.putDouble("tongtien", tongtienmonan);
                 Intent intent = new Intent(GioHangActivity.this, MyOrderActivity.class);
-                intent.putExtra("tongtien", tongtienmonan);
+                intent.putExtra("data", bundle);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -75,7 +81,6 @@ public class GioHangActivity extends AppCompatActivity {
         dataRef.child(idNguoiDung).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<GioHang> arrayList = new ArrayList<>();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     GioHang gioHang = dataSnapshot.getValue(GioHang.class);
                     arrayList.add(gioHang);

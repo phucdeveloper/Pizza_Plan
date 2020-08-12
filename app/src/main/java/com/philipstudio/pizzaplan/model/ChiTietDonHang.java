@@ -1,16 +1,23 @@
 package com.philipstudio.pizzaplan.model;
 
-import java.util.List;
+import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.ArrayList;
+
+@IgnoreExtraProperties
 public class ChiTietDonHang {
     private String idNguoiDung;
     private String idDonHang;
-    private List<GioHang> listDanhSachGioHang;
+    private ArrayList<GioHang> listDanhSachGioHang;
+    private String thoigiandathang;
 
-    public ChiTietDonHang(String idNguoiDung, String idDonHang, List<GioHang> listDanhSachGioHang) {
+    public ChiTietDonHang(){}
+
+    public ChiTietDonHang(String idNguoiDung, String idDonHang, ArrayList<GioHang> listDanhSachGioHang, String thoigiandathang) {
         this.idNguoiDung = idNguoiDung;
         this.idDonHang = idDonHang;
         this.listDanhSachGioHang = listDanhSachGioHang;
+        this.thoigiandathang = thoigiandathang;
     }
 
     public String getIdNguoiDung() {
@@ -21,7 +28,11 @@ public class ChiTietDonHang {
         return idDonHang;
     }
 
-    public List<GioHang> getListDanhSachGioHang() {
+    public ArrayList<GioHang> getListDanhSachGioHang() {
         return listDanhSachGioHang;
+    }
+
+    public String getThoigiandathang() {
+        return thoigiandathang;
     }
 }

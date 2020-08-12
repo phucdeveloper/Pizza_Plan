@@ -10,16 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.philipstudio.pizzaplan.R;
+import com.philipstudio.pizzaplan.model.GioHang;
 import com.philipstudio.pizzaplan.model.MonAn;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.ViewHolder> {
 
-    ArrayList<MonAn> arrayList;
+    ArrayList<GioHang> arrayList;
     Context context;
 
-    public MonAnAdapter(ArrayList<MonAn> arrayList, Context context) {
+    public MonAnAdapter(ArrayList<GioHang> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -33,8 +36,11 @@ public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txtTenmonan.setText(arrayList.get(position).getTenMonAn());
-        holder.txtGiatien.setText(String.valueOf(arrayList.get(position).getGia()));
+        holder.txtTenmonan.setText(arrayList.get(position).getMonAn().getTenMonAn());
+        NumberFormat formatter = new DecimalFormat("#,###");
+        double giatien = arrayList.get(position).getMonAn().getGia();
+        String formattedGiatien = formatter.format(giatien);
+        holder.txtGiatien.setText(formattedGiatien + " " + "đồng");
     }
 
     @Override

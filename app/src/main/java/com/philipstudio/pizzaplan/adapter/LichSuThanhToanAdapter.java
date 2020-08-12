@@ -42,7 +42,6 @@ public class LichSuThanhToanAdapter extends RecyclerView.Adapter<LichSuThanhToan
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.txtIdDonhang.setText(arrayList.get(position).getIdDonHang());
         holder.txtThoigian.setText(arrayList.get(position).getThoigian());
-        holder.txtTongtien.setText(String.valueOf(arrayList.get(position).getTongtien()));
         holder.txtDiachi.setText(arrayList.get(position).getDiadiem());
 
         holder.txtChitiet.setOnClickListener(new View.OnClickListener() {
@@ -57,12 +56,12 @@ public class LichSuThanhToanAdapter extends RecyclerView.Adapter<LichSuThanhToan
 
     @Override
     public int getItemCount() {
-        return 3;
+        return arrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView txtChitiet, txtIdDonhang, txtThoigian, txtDiachi, txtTongtien;
+        TextView txtChitiet, txtIdDonhang, txtThoigian, txtDiachi;
         AvatarImageView avatarImageView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -71,7 +70,6 @@ public class LichSuThanhToanAdapter extends RecyclerView.Adapter<LichSuThanhToan
             txtChitiet = itemView.findViewById(R.id.item_textview_chitietdonhang);
             txtIdDonhang = itemView.findViewById(R.id.item_textview_iddathang);
             txtDiachi = itemView.findViewById(R.id.item_textview_diachigiaohang);
-            txtTongtien = itemView.findViewById(R.id.item_textview_tongtien);
             txtThoigian = itemView.findViewById(R.id.item_textview_thoigian);
             avatarImageView = itemView.findViewById(R.id.item_avatarimageview_anhdaidien);
         }

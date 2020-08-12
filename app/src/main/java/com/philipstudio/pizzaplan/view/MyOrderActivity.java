@@ -7,15 +7,17 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.Api;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.philipstudio.pizzaplan.R;
 import com.philipstudio.pizzaplan.model.DonHang;
+import com.philipstudio.pizzaplan.model.GioHang;
 import com.philipstudio.pizzaplan.model.NguoiDung;
 import com.philipstudio.pizzaplan.utils.NguoiDungUtils;
 import com.vnpay.qr.VnpayQRReturnEntity;
@@ -33,6 +36,7 @@ import com.vnpay.qr.utils.VNPAYTags;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class MyOrderActivity extends AppCompatActivity {
@@ -42,6 +46,7 @@ public class MyOrderActivity extends AppCompatActivity {
     ImageButton imgButtonGooglemap;
     Button btnTieptuc, btnMenuorder;
     Toolbar toolbar;
+    Spinner spinnerPhuongThucThanhToan;
 
     NguoiDungUtils nguoiDungUtils;
     FirebaseDatabase firebaseDatabase;
@@ -50,6 +55,9 @@ public class MyOrderActivity extends AppCompatActivity {
     double tongtienhoadon;
     String diachi;
     static final int REQUEST_CODE_GET_LOACTION_SUCCESS = 1;
+    boolean isTheATM = false, isQRCode = false, isViDienTu = false;
+    String[] arrayPhuongThucThanhToan = {"Chọn phương thức thanh toán", "Thẻ ATM", "QR code", "Ví điện tử"};
+    ArrayList<GioHang> arrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +68,12 @@ public class MyOrderActivity extends AppCompatActivity {
 
         final Intent intent = getIntent();
         if (intent != null) {
-            tongtienhoadon = intent.getDoubleExtra("tongtien", 100);
-            thietLapThongTinHoaDon(tongtienhoadon);
+            Bundle bundle = intent.getBundleExtra("data");
+            if (bundle != null){
+                tongtienhoadon = bundle.getDouble("tongtien", 100);
+                thietLapThongTinHoaDon(tongtienhoadon);
+                arrayList = bundle.getParcelableArrayList("danhSachGioHang");
+            }
         }
 
         hienThiThongTinNguoiDung(txtTenNguoiDung, edtEmailOrPhonenumber);
@@ -77,26 +89,79 @@ public class MyOrderActivity extends AppCompatActivity {
         btnTieptuc.setOnClickListener(listener);
         imgButtonGooglemap.setOnClickListener(listener);
 
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayPhuongThucThanhToan);
+        spinnerPhuongThucThanhToan.setAdapter(arrayAdapter);
+
+        spinnerPhuongThucThanhToan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 1:
+                        isTheATM = true;
+                        isQRCode = false;
+                        isViDienTu = false;
+                        break;
+                    case 2:
+                        isQRCode = true;
+                        isViDienTu = false;
+                        isTheATM = false;
+                        break;
+                    case 3:
+                        isViDienTu = true;
+                        isQRCode = false;
+                        isTheATM = false;
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(MyOrderActivity.this, "Bạn chưa chọn phương thức thanh toán", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            String idOrder = txtIDOrder.getText().toString();
+            String idNguoiDung = nguoiDungUtils.getIdUser();
+            String thoigian = txtGiophut.getText().toString() + " " + txtNgayThang.getText().toString();
+            String diadiem = edtDiachi.getText().toString();
+            String text = txtTongtien.getText().toString();
+            String[] data = text.split(" ");
+            double tongtien = Double.parseDouble(data[0]);
+            DonHang donHang = new DonHang(idOrder, idNguoiDung, thoigian, diadiem, tongtien, "Đang đặt hàng");
             switch (v.getId()) {
                 case R.id.button_thanhtoan:
-                    String idOrder = txtIDOrder.getText().toString();
-                    String idNguoiDung = nguoiDungUtils.getIdUser();
-                    String thoigian = txtGiophut.getText().toString() + " " + txtNgayThang.getText().toString();
-                    String diadiem = edtDiachi.getText().toString();
-                    String text = txtTongtien.getText().toString();
-                    String[] data = text.split(" ");
-                    double tongtien = Double.parseDouble(data[0]);
-                    DonHang donHang = new DonHang(idOrder, idNguoiDung, thoigian, diadiem, tongtien, "Đang đặt hàng");
-                    Intent intent = new Intent(MyOrderActivity.this, ThanhToanActivity.class);
-                    intent.putExtra("donHang", donHang);
-                    startActivity(intent);
-//                    QRActivity.setupQR(MyOrderActivity.this, VNPAYTags.CURRENCY_TYPE1,
-//                            "http://mobile.vnpay.vn/IVB/Merchant.html", VNPAYTags.LANG_VN, R.style.MyCustomQRTheme);
+                    if (isTheATM) {
+                        if (!TextUtils.isEmpty(diadiem)) {
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("donHang", donHang);
+                            bundle.putParcelableArrayList("danhSachGioHang", arrayList);
+                            Intent intent = new Intent(MyOrderActivity.this, ThanhToanActivity.class);
+                            intent.putExtra("data", bundle);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(MyOrderActivity.this, "Bạn chưa chọn địa chỉ", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } else if (isQRCode) {
+                        if (!TextUtils.isEmpty(diadiem)) {
+                            QRActivity.setupQR(MyOrderActivity.this, VNPAYTags.CURRENCY_TYPE1,
+                                    "http://mobile.vnpay.vn/IVB/Merchant.html", VNPAYTags.LANG_VN, R.style.MyCustomQRTheme);
+                        } else {
+                            Toast.makeText(MyOrderActivity.this, "Bạn chưa chọn địa chỉ", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } else if (isViDienTu) {
+                        if (!TextUtils.isEmpty(diadiem)) {
+                            Toast.makeText(MyOrderActivity.this, "Ban đã chọn thanh toán bằng ví điện tử", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(MyOrderActivity.this, "Bạn chưa chọn địa chỉ", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                     break;
                 case R.id.button_menuorder:
                     Intent intent2 = new Intent(MyOrderActivity.this, HomeActivity.class);
@@ -119,12 +184,11 @@ public class MyOrderActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        if (resultCode == RESULT_OK){
-            if(requestCode == REQUEST_CODE_GET_LOACTION_SUCCESS && data != null) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_GET_LOACTION_SUCCESS && data != null) {
                 diachi = data.getStringExtra("diachi");
                 edtDiachi.setText(diachi);
-            }
-            else if (requestCode == VNPAYTags.REQUEST_VNPAY_QR && data != null){
+            } else if (requestCode == VNPAYTags.REQUEST_VNPAY_QR && data != null) {
                 String dataV = data.getStringExtra(VNPAYTags.QR_RESPONSE);
                 VnpayQRReturnEntity returnEntity = Constants.g().getGsonInstance().fromJson(dataV, VnpayQRReturnEntity.class); // Sử dụng Gson parse lại Entity từ Dữ liệu SDK
 //                Intent intent = new Intent(this, ThanhToanActivity.class);
@@ -180,6 +244,7 @@ public class MyOrderActivity extends AppCompatActivity {
         edtDiachi = findViewById(R.id.edittext_diachi);
         edtThoigiangiaohang = findViewById(R.id.edittext_thoigiangiaohang);
         edtEmailOrPhonenumber = findViewById(R.id.edittext_diachilienhe);
+        spinnerPhuongThucThanhToan = findViewById(R.id.spinner_phuongthucthanhtoan);
 
         btnTieptuc = findViewById(R.id.button_thanhtoan);
         btnMenuorder = findViewById(R.id.button_menuorder);

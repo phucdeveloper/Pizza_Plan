@@ -1,7 +1,9 @@
 package com.philipstudio.pizzaplan.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,22 +11,49 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.philipstudio.pizzaplan.R;
+import com.philipstudio.pizzaplan.model.ChiTietDonHang;
+import com.philipstudio.pizzaplan.model.DonHang;
+import com.philipstudio.pizzaplan.model.GioHang;
+import com.philipstudio.pizzaplan.utils.NguoiDungUtils;
+
+import java.util.ArrayList;
 
 public class ThongTinThanhToanFragment extends Fragment {
     EditText edtSothe, edtMabaove, edtNgaycap, edtSotien, edtTaikhoanthuhuong;
     Button btnThanhtoan;
     TextView txtKiemtra, txtKetqua;
 
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference dataRef, dataRefChiTiet;
+    DonHang donHang;
+    ArrayList<GioHang> arrayList = new ArrayList<>();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_thongtinthanhtoan, container, false);
+
+        Intent intent = getActivity().getIntent();
+        if (intent != null) {
+            Bundle bundle = intent.getBundleExtra("data");
+            if (bundle != null) {
+                donHang = (DonHang) bundle.getSerializable("donHang");
+                arrayList = bundle.getParcelableArrayList("danhSachGioHang");
+            }
+        }
+
         edtSothe = view.findViewById(R.id.edittext_sothe);
         edtMabaove = view.findViewById(R.id.edittext_mabaove);
         edtSotien = view.findViewById(R.id.edittext_nhapsotien);
@@ -33,6 +62,7 @@ public class ThongTinThanhToanFragment extends Fragment {
         txtKiemtra = view.findViewById(R.id.textview_kiemtra);
         txtKetqua = view.findViewById(R.id.textview_ketqua);
         edtNgaycap = view.findViewById(R.id.edittext_ngaycap);
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
         edtSothe.addTextChangedListener(new TextWatcher() {
             private static final int TOTAL_SYMBOLS = 19; // size of pattern 0000-0000-0000-0000
@@ -96,6 +126,40 @@ public class ThongTinThanhToanFragment extends Fragment {
                     }
                 }
                 return digits;
+            }
+        });
+
+        btnThanhtoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(edtSothe.getText().toString()) || TextUtils.isEmpty(edtNgaycap.getText())
+                        || TextUtils.isEmpty(edtMabaove.getText().toString()) || TextUtils.isEmpty(edtSotien.getText().toString())
+                        || TextUtils.isEmpty(edtTaikhoanthuhuong.getText().toString())) {
+                    Toast.makeText(getContext(), "Hãy nhập đầy đủ dữ liệu để thanh toán đơn hàng", Toast.LENGTH_SHORT).show();
+                } else {
+                    NguoiDungUtils nguoiDungUtils = new NguoiDungUtils(getContext());
+                    String id = nguoiDungUtils.getIdUser();
+                    dataRef = firebaseDatabase.getReference().child("DonHang");
+                    dataRef.child(id).child(donHang.getIdDonHang()).setValue(donHang)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    final String idNguoiDung = donHang.getIdNguoiDung();
+                                    final String idDonHang = donHang.getIdDonHang();
+                                    final String thoigian = donHang.getThoigian();
+                                    ChiTietDonHang chiTietDonHang = new ChiTietDonHang(idNguoiDung, idDonHang, arrayList, thoigian);
+                                    dataRefChiTiet = firebaseDatabase.getReference().child("ChiTietDonHang");
+                                    dataRefChiTiet.child(idNguoiDung).child(idDonHang).setValue(chiTietDonHang);
+                                    Toast.makeText(getContext(), "Thanh toán dơn hàng thành công", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getContext(), "Không thể thanh toán cho đơn hàng này", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
             }
         });
 

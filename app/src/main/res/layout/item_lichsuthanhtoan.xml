@@ -91,17 +91,6 @@
 
                     </LinearLayout>
                 </LinearLayout>
-                <TextView
-                    android:id="@+id/item_textview_tongtien"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_centerVertical="true"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="18sp"
-                    android:text="@string/price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
             </RelativeLayout>
         </LinearLayout>
 
