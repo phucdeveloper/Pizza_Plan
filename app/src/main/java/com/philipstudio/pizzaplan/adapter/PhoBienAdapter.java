@@ -2,12 +2,9 @@ package com.philipstudio.pizzaplan.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,14 +53,6 @@ public class PhoBienAdapter extends RecyclerView.Adapter<PhoBienAdapter.ViewHold
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         dataRef = firebaseDatabase.getReference().child("GioHang");
-        holder.btnChon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setUpButtonChon(holder.btnChon);
-            }
-        });
-
-
     }
 
     @Override
@@ -74,14 +63,12 @@ public class PhoBienAdapter extends RecyclerView.Adapter<PhoBienAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView imgAnh;
         TextView txtTenMonAn, txtGia;
-        Button btnChon;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imgAnh = itemView.findViewById(R.id.item_imageview_anh);
             txtTenMonAn = itemView.findViewById(R.id.item_textview_tenmonan);
             txtGia = itemView.findViewById(R.id.item_textview_gia);
-            btnChon = itemView.findViewById(R.id.button_chon);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -94,11 +81,5 @@ public class PhoBienAdapter extends RecyclerView.Adapter<PhoBienAdapter.ViewHold
                 }
             });
         }
-    }
-
-    private void setUpButtonChon(Button btnClick){
-        btnClick.setText("Đã chọn");
-        btnClick.setTextColor(Color.BLACK);
-        btnClick.setBackgroundResource(R.drawable.custom_button_dachon);
     }
 }

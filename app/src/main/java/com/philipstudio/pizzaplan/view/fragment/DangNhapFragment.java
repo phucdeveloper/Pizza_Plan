@@ -29,6 +29,7 @@ public class DangNhapFragment extends Fragment {
 
     FirebaseAuth firebaseAuth;
     OnSignInClickListener onSignInClickListener;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,10 +42,9 @@ public class DangNhapFragment extends Fragment {
                 String emailOrPhonenumber = edtEmailOrPhonenumber.getText().toString();
                 String matkhau = edtMatkhau.getText().toString();
 
-                if (TextUtils.isEmpty(emailOrPhonenumber) || TextUtils.isEmpty(matkhau)){
+                if (TextUtils.isEmpty(emailOrPhonenumber) || TextUtils.isEmpty(matkhau)) {
                     Toast.makeText(getContext(), "Bạn cần nhập đầy đủ thông tin để đăng nhập", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     dangNhapTaiKhoan(emailOrPhonenumber, matkhau);
                 }
             }
@@ -52,44 +52,32 @@ public class DangNhapFragment extends Fragment {
         return view;
     }
 
-    private void dangNhapTaiKhoan(String str1, String str2){
-        if (TextUtils.isEmpty(str1)||TextUtils.isEmpty(str2)){
-            Toast.makeText(getContext(), "Bạn cần nhập đầy đủ thông tin nha", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            NguoiDungUtils nguoiDungUtils = new NguoiDungUtils(getContext());
-            nguoiDungUtils.setIdUser("5mhBiXVvzGQFNPKxM4EcXKRCHf22");
+    private void dangNhapTaiKhoan(String str1, String str2) {
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.signInWithEmailAndPassword(str1, str2).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                if (authResult != null) {
+                    FirebaseUser firebaseUser = authResult.getUser();
+                    if (firebaseUser != null) {
+                        String idNguoiDung = firebaseUser.getUid();
+                        if (getContext() != null) {
+                            NguoiDungUtils nguoiDungUtils = new NguoiDungUtils(getContext());
+                            nguoiDungUtils.setIdUser(idNguoiDung);
 
-            if (onSignInClickListener != null){
-                onSignInClickListener.onSuccess(true);
+                            if (onSignInClickListener != null) {
+                                onSignInClickListener.onSuccess(true);
+                            }
+                        }
+                    }
+                }
             }
-        }
-
-//        firebaseAuth = FirebaseAuth.getInstance();
-//        firebaseAuth.signInWithEmailAndPassword(str1, str2).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-//            @Override
-//            public void onSuccess(AuthResult authResult) {
-//                if (authResult != null){
-//                    FirebaseUser firebaseUser = authResult.getUser();
-//                    if (firebaseUser != null){
-//                        String idNguoiDung = firebaseUser.getUid();
-//                        if (getContext() != null){
-//                            NguoiDungUtils nguoiDungUtils = new NguoiDungUtils(getContext());
-//                            nguoiDungUtils.setIdUser(idNguoiDung);
-//
-//                            if (onSignInClickListener != null){
-//                                onSignInClickListener.onSuccess(true);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(getContext(), "Đăng nhập không thành công " + e.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "Đăng nhập không thành công " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -99,13 +87,13 @@ public class DangNhapFragment extends Fragment {
         onSignInClickListener = (OnSignInClickListener) context;
     }
 
-    private void initView(View view){
+    private void initView(View view) {
         edtEmailOrPhonenumber = view.findViewById(R.id.edittext_sodienthoai_or_email);
         edtMatkhau = view.findViewById(R.id.edittext_matkhau);
         btnDangnhap = view.findViewById(R.id.button_dangnhap);
     }
 
-    public interface OnSignInClickListener{
+    public interface OnSignInClickListener {
         void onSuccess(boolean isSuccess);
     }
 }

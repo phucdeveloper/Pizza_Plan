@@ -40,7 +40,6 @@ public class GioHangActivity extends AppCompatActivity {
     NguoiDungUtils utils;
     double giatien, tongtienmonan;
     int soluong;
-    ArrayList<GioHang> arrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,19 +59,6 @@ public class GioHangActivity extends AppCompatActivity {
             }
         });
 
-        btnDathang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList("danhSachGioHang", arrayList);
-                bundle.putDouble("tongtien", tongtienmonan);
-                Intent intent = new Intent(GioHangActivity.this, MyOrderActivity.class);
-                intent.putExtra("data", bundle);
-                startActivity(intent);
-                finish();
-            }
-        });
-
     }
 
     private void setUpDataGioHang(String idNguoiDung){
@@ -81,6 +67,7 @@ public class GioHangActivity extends AppCompatActivity {
         dataRef.child(idNguoiDung).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                final ArrayList<GioHang> arrayList = new ArrayList<>();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     GioHang gioHang = dataSnapshot.getValue(GioHang.class);
                     arrayList.add(gioHang);
@@ -90,6 +77,19 @@ public class GioHangActivity extends AppCompatActivity {
                 recyclerView.setAdapter(adapter);
 
                 hienThiTongTien(arrayList);
+
+                btnDathang.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelableArrayList("danhSachGioHang", arrayList);
+                        bundle.putDouble("tongtien", tongtienmonan);
+                        Intent intent = new Intent(GioHangActivity.this, MyOrderActivity.class);
+                        intent.putExtra("data", bundle);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
             }
 
             @Override

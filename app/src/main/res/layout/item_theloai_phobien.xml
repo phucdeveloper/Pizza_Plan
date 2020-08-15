@@ -52,7 +52,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/colorText"
                     android:text="@string/name"
-                    android:layout_width="120dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 
@@ -77,18 +77,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
-
-            <Button
-                android:layout_alignParentEnd="true"
-                android:id="@+id/button_chon"
-                android:textColor="@color/colorBackground"
-                android:background="@drawable/custom_button_chon"
-                android:text="@string/chon"
-                android:layout_gravity="end"
-                android:layout_marginEnd="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
         </RelativeLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
