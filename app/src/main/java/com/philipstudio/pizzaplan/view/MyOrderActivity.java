@@ -129,10 +129,10 @@ public class MyOrderActivity extends AppCompatActivity {
             String idNguoiDung = nguoiDungUtils.getIdUser();
             String thoigian = txtGiophut.getText().toString() + " " + txtNgayThang.getText().toString();
             String diadiem = edtDiachi.getText().toString();
-            String text = txtTongtien.getText().toString();
-            String[] data = text.split(" ");
-            double tongtien = Double.parseDouble(data[0]);
-            DonHang donHang = new DonHang(idOrder, idNguoiDung, thoigian, diadiem, tongtien, "Đang đặt hàng");
+//            String text = txtTongtien.getText().toString();
+//            String[] data = text.split(" ");
+//            double tongtien = Double.parseDouble(tongtienhoadon);
+            DonHang donHang = new DonHang(idOrder, idNguoiDung, thoigian, diadiem, tongtienhoadon, "Đang đặt hàng");
             switch (v.getId()) {
                 case R.id.button_thanhtoan:
                     if (isTheATM) {

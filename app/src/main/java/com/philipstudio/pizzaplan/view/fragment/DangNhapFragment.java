@@ -1,6 +1,7 @@
 package com.philipstudio.pizzaplan.view.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -45,7 +46,7 @@ public class DangNhapFragment extends Fragment {
                 if (TextUtils.isEmpty(emailOrPhonenumber) || TextUtils.isEmpty(matkhau)) {
                     Toast.makeText(getContext(), "Bạn cần nhập đầy đủ thông tin để đăng nhập", Toast.LENGTH_SHORT).show();
                 } else {
-                    dangNhapTaiKhoan(emailOrPhonenumber, matkhau);
+                   dangNhapTaiKhoan(emailOrPhonenumber, matkhau);
                 }
             }
         });

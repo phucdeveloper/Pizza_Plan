@@ -41,6 +41,7 @@ public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.ViewHolder> 
         double giatien = arrayList.get(position).getMonAn().getGia();
         String formattedGiatien = formatter.format(giatien);
         holder.txtGiatien.setText(formattedGiatien + " " + "đồng");
+        holder.txtSoluong.setText(String.valueOf(arrayList.get(position).getSoluong()));
     }
 
     @Override
